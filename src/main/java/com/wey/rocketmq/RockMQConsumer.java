@@ -7,6 +7,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 
 public class RockMQConsumer {
@@ -30,6 +31,9 @@ public class RockMQConsumer {
         
         // 设置批量消费个数,默认是1，即一次消费一条参数
         // consumer.setConsumeMessageBatchMaxSize(10);
+        
+        // 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         
         /** 
          * 订阅指定topic下tags分别等于TagA或TagC或TagD 
